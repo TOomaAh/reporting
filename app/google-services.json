@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "101816132657",
+    "project_id": "quiveuxgagnerdesmillions-e9b58",
+    "storage_bucket": "quiveuxgagnerdesmillions-e9b58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101816132657:android:7155a69d61119245e56110",
+        "android_client_info": {
+          "package_name": "com.toto.quiveuxgagnerdelargentenmasse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101816132657-g60si3ppttblgetbis0kuaer504sehiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQAAqMc3VwVeXtPIzFGnawXXpsSpOn7Y4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101816132657-g60si3ppttblgetbis0kuaer504sehiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
