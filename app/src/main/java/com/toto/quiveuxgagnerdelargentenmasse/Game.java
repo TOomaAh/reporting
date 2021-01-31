@@ -37,7 +37,7 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
+        Bundle bundle = new Bundle();
         timer = findViewById(R.id.chrono);
         question = findViewById(R.id.q);
         back_to = findViewById(R.id.back_to_menu_warning);
@@ -48,6 +48,7 @@ public class Game extends AppCompatActivity {
         question.setText(MainActivity.questions.get(i).getAsk());
 
         int give = r.nextInt(ANSWERS_TOTAL);
+        bundle.putInt("Question Mehtod", give);
         switch(give) {
             case 0:
                 // the answer is top left
@@ -96,6 +97,7 @@ public class Game extends AppCompatActivity {
                         timer.setTextColor(Color.RED);
                     }
                 }else {
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.POST_SCORE, bundle);
                     timer.stop();
                     Intent i = new Intent(Game.this, Gameover.class);
                     startActivity(i);
@@ -112,6 +114,8 @@ public class Game extends AppCompatActivity {
                         .setPositiveButton(getResources().getString(R.string.pop_yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                bundle.putBoolean("LeaveGame", true);
+                                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.POST_SCORE, bundle);
                                 MainActivity.score = 0;
                                 Intent j = new Intent(Game.this, MainActivity.class);
                                 startActivity(j);
@@ -121,7 +125,7 @@ public class Game extends AppCompatActivity {
                         .setNegativeButton(getResources().getString(R.string.pop_no), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                bundle.putBoolean("Leave Game", false);
                             }
                         })
                         .setCancelable(false)
@@ -134,6 +138,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 answer1.setTextColor(Color.RED);
+                bundle.putBoolean("Good Answer", true);
                 Intent i = new Intent(Game.this, Gameover.class);
                 startActivity(i);
                 finish();
@@ -143,6 +148,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 answer2.setTextColor(Color.RED);
+                bundle.putBoolean("Good Answer", true);
                 Intent i = new Intent(Game.this, Gameover.class);
                 startActivity(i);
                 finish();
@@ -152,6 +158,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 answer3.setTextColor(Color.RED);
+                bundle.putBoolean("Bad Response", true);
                 Intent i = new Intent(Game.this, Gameover.class);
                 startActivity(i);
                 finish();
@@ -161,6 +168,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 answerTrue.setTextColor(Color.GREEN);
+                bundle.putBoolean("Good Response", true);
                 if(!MainActivity.questions.isEmpty()) {
                     //retirer la question en cours
                     MainActivity.questions.remove(i);
